@@ -1,7 +1,4 @@
-import Spinner from './Spinner';
-
 export default function Count({
-  loading,
   count,
   setCount
 }) {

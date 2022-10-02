@@ -13,7 +13,7 @@ export default function FileDrop({image, setImage}) {
       );
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({
       accept: {
@@ -24,7 +24,7 @@ export default function FileDrop({image, setImage}) {
     });
 
   return (
-    <div {...getRootProps()}>
+    <div {...getRootProps()} className="mt-16">
       {image.length > 0 ?
         image.map((i) => <img src={i.preview} alt="" />) :
         null

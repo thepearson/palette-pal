@@ -5,6 +5,9 @@ export default function Count({
   setCount
 }) {
   return (
-    <Slider axis="x" x={count} xmin={1} xmax={16} onChange={({x}) => setCount(x)} />
+    <div className='flex flex-col items-center w-full'>
+      <Slider axis="x" x={count} xmin={2} xmax={6} onChange={({x}) => setCount(x)} />
+      <span className="mt-4">Showing {count} colors</span>
+    </div>
   )
 }

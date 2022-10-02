@@ -13,13 +13,7 @@ function App() {
   const [count, setCount] = useState(5);
   const [image, setImage] = useState([]);
   const [colors, setColors] = useState([]);
-
-
-  const processImage = async (i) => {
-    const data = palette(await pixels(i), count);
-    setColors(data.colors);
-  }
-
+  const [amount, setAmount] = useState([]);
   useEffect(() => {
     if (image.length > 0) {
       processImage(image[0]);
@@ -35,21 +29,26 @@ function App() {
     if (image.length > 0) {
       processImage(image[0]);
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
+
+  const processImage = async (i) => {
+    const data = palette(await pixels(i), count);
+    setColors(data.colors);
+    setAmount(data.amount);
+  }
 
   const reset = () => {
     setImage([]);
   }
 
   return (
-    <div>
+    <div className="pb-40 flex items-center justify-center flex-col bg-slate-200 min-h-screen">
       <Logo />
       {image.length > 0 ? image.map( (i, k) => (<div key={k}>
           <Image src={i.preview} alt={"Pallet Pal Preview"} reset={reset} />
           <Count count={count} setCount={setCount} />
-          <Colors colors={colors} />
+          <Colors colors={colors} amount={amount} />
         </div>
         )
       ): <FileDrop image={image} setImage={setImage} />}

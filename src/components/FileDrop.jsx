@@ -11,7 +11,8 @@ export default function FileDrop({image, setImage}) {
             })
         )
       );
-  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({
       accept: {

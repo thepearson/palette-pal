@@ -1,23 +1,58 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
 import './App.css';
+import FileDrop from './components/FileDrop';
+import Logo from './components/Logo';
+import Image from './components/Image';
+
+import * as palette from 'image-palette';
+import * as pixels from 'image-pixels';
+import Colors from './components/Colors';
+import Count from './components/Count';
 
 function App() {
+  const [count, setCount] = useState(5);
+  const [image, setImage] = useState([]);
+  const [colors, setColors] = useState([]);
+
+
+  const processImage = async (i) => {
+    const data = palette(await pixels(i), count);
+    setColors(data.colors);
+  }
+
+  useEffect(() => {
+    if (image.length > 0) {
+      processImage(image[0]);
+    }
+    return () => {
+      image.forEach((img) => URL.revokeObjectURL(img.preview));
+    }
+  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [image]);
+
+  useEffect(() => {
+    if (image.length > 0) {
+      processImage(image[0]);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count]);
+
+  const reset = () => {
+    setImage([]);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Logo />
+      {image.length > 0 ? image.map( (i, k) => (<div key={k}>
+          <Image src={i.preview} alt={"Pallet Pal Preview"} reset={reset} />
+          <Count count={count} setCount={setCount} />
+          <Colors colors={colors} />
+        </div>
+        )
+      ): <FileDrop image={image} setImage={setImage} />}
     </div>
   );
 }

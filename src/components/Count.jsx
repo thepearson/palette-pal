@@ -1,13 +1,15 @@
-import Slider from 'react-input-slider';
+import Spinner from './Spinner';
 
 export default function Count({
+  loading,
   count,
   setCount
 }) {
   return (
-    <div className='flex flex-col items-center w-full'>
-      <Slider axis="x" x={count} xmin={2} xmax={6} onChange={({x}) => setCount(x)} />
-      <span className="mt-4">Showing {count} colors</span>
+    <div className='flex flex-row items-center w-full'>
+      <button className="grow text-4xl px-8 bg-slate-300" type="button" onClick={() => setCount(count-1)}>-</button>
+      <span className="grow mt-2 text-8xl text-center">{count}</span>
+      <button className="grow text-4xl px-8 bg-slate-300" type="button" onClick={() => setCount(count+1)}>+</button>
     </div>
   )
 }

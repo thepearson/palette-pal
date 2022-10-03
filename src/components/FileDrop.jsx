@@ -1,14 +1,15 @@
 import React, {useCallback} from 'react'
 import {useDropzone} from 'react-dropzone'
 
-export default function FileDrop({image, setImage}) {
+export default function FileDrop({images, setImages}) {
 
   const onDrop = useCallback(acceptedFiles => {
-      setImage(
+    console.log(acceptedFiles);
+      setImages(
         acceptedFiles.map((file) =>
-            Object.assign(file, {
-                preview: URL.createObjectURL(file),
-            })
+          Object.assign(file, {
+              preview: URL.createObjectURL(file),
+          })
         )
       );
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -25,8 +26,8 @@ export default function FileDrop({image, setImage}) {
 
   return (
     <div {...getRootProps()} className="mt-16">
-      {image.length > 0 ?
-        image.map((i) => <img src={i.preview} alt="" />) :
+      {images.length > 0 ?
+        images.map((i) => <img src={i.preview} alt="" />) :
         null
       }
       <input {...getInputProps()} />

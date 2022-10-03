@@ -14,6 +14,13 @@ export default function ImageResult({
   const [colors, setColors] = useState([]);
   const [amount, setAmount] = useState([]);
   useEffect(() => {
+
+    const processImages = async () => {
+      const data = palette(await pixels(image), count);
+      setColors(data.colors);
+      setAmount(data.amount);
+    }
+    
     if (image) {
       processImages(image);
     }
@@ -23,11 +30,7 @@ export default function ImageResult({
     setCount(num);
   }
 
-  const processImages = async () => {
-    const data = palette(await pixels(image), count);
-    setColors(data.colors);
-    setAmount(data.amount);
-  }
+
 
   return (
     <div className="flex mt-4 mb-4 h-[30rem] justify-center w-full bg-white flex-col lg:flex-row">

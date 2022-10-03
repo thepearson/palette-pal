@@ -20,7 +20,7 @@ export default function ImageResult({
       setColors(data.colors);
       setAmount(data.amount);
     }
-    
+
     if (image) {
       processImages(image);
     }
@@ -30,11 +30,9 @@ export default function ImageResult({
     setCount(num);
   }
 
-
-
   return (
-    <div className="flex mt-4 mb-4 h-[30rem] justify-center w-full bg-white flex-col lg:flex-row">
-      <div className="p-8 flex items-center justify-center image w-[30rem] bg-slate-100 flex-col">
+    <div className="flex mt-4 mb-4 justify-center w-full bg-white flex-col lg:flex-row">
+      <div className="p-8 flex items-center justify-center image w-full bg-slate-100 flex-col lg:w-[30rem]">
         <Image src={image.preview} alt={"Pallet Pal Preview"} />
         <div>
           <Count count={count} handleCount={updateCount} max={5} min={2} />

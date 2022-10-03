@@ -25,9 +25,10 @@ function App() {
     <div>
       <NavBar />
       <div className="flex p-4 items-center justify-center flex-col bg-slate-200 min-h-screen">
-        {images.length > 0 && <Clear handleClear={clearAll} />}
+        {images.length > 1 && <Clear handleClear={clearAll} />}
         {images.map((image, k) => (<ImageResult image={image} key={`image-${k}`} remove={() => removeImage(k)} />))}
-        {images.length > 0 ? <Clear handleClear={clearAll} /> : <FileDrop images={images} setImages={setImages} />}
+        {images.length > 1 && <Clear handleClear={clearAll} />}
+        {images.length === 0 && <FileDrop images={images} setImages={setImages} />}
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ export default function FileDrop({images, setImages}) {
 
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({
+    useFsAccessApi: false,
       accept: {
         'image/png': ['.png'],
         'image/jpg': ['.jpeg', '.jpg'],
@@ -33,8 +34,8 @@ export default function FileDrop({images, setImages}) {
       <input {...getInputProps()} />
       {
         isDragActive ?
-          <p>Drop the files here ...</p> :
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <p>Drop the image or images here ...</p> :
+          <p>Drag 'n' drop some image files here, or click to select files</p>
       }
     </div>
   )

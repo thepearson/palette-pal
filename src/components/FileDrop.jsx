@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import {useCallback} from 'react'
 import {useDropzone} from 'react-dropzone'
 
 export default function FileDrop({images, setImages}) {
@@ -27,10 +27,6 @@ export default function FileDrop({images, setImages}) {
 
   return (
     <div {...getRootProps()} className="mt-16">
-      {images.length > 0 ?
-        images.map((i) => <img src={i.preview} alt="" />) :
-        null
-      }
       <input {...getInputProps()} />
       {
         isDragActive ?

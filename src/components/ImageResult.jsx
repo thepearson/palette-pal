@@ -67,10 +67,7 @@ export default function ImageResult({
             </svg>  
           </button>
         </div>
-        <div>
-          {colors.length > 0 && <Colors colors={colors} amount={amount} />}
-        </div>
-
+        {colors.length > 0 && <Colors colors={colors} amount={amount} />}
       </div>
     </div>
   )

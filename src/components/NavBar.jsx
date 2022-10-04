@@ -9,6 +9,11 @@ export default function NavBar() {
         <span className="font-semibold text-2xl tracking-tight">Palette Pal</span>
       </div>
       <div className="w-full block flex-grow lg:flex lg:items-end justify-end lg:w-auto">
+        <div className="text-lg lg:flex-grow">
+          <a href="#favourites" className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
+            Favourites
+          </a>
+        </div>
         <div>
           <a href="https://github.com/thepearson/palette-pal" className="inline-flex items-center text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-blue-600 hover:bg-white lg:mt-0"><FaGithub className="mr-2" /> Github</a>
         </div>

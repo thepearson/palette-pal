@@ -104,7 +104,7 @@ export default function Colors({
       })
     }
     
-    console.log(value, 'was coppied to the clipboard');
+    console.warn(value, 'was coppied to the clipboard');
   }
 
   return (

@@ -3,13 +3,15 @@ import Count from './Count';
 import Colors from './Colors';
 import Image from './Image';
 import Spinner from './Spinner';
+import { FaPlus } from 'react-icons/fa';
 import * as palette from 'image-palette';
 import * as pixels from 'image-pixels';
 
 export default function ImageResult({
 //  id,
   image,
-  remove
+  remove,
+  handleAddFavourite
 }) {
   const [count, setCount] = useState(3);
   const [colors, setColors] = useState([]);
@@ -44,19 +46,10 @@ export default function ImageResult({
   }
 
   return (
-    <div className="flex mt-4 mb-4 justify-center w-full bg-white flex-col lg:flex-row">
-      <div className="p-8 flex items-center justify-center image w-full bg-slate-100 flex-col lg:w-[30rem]">
-        <Image src={image.preview} alt={"Pallet Pal Preview"} />
-        <div>
-          <Count count={count} handleCount={updateCount} max={5} min={2} />
-        </div>
-      </div>
-      <div className="palette flex flex-col grow p-4 relative">
-        {loading && <div className="absolute inset-0 items-center z-10 w-full h-full flex justify-center opacity-50 bg-slate-400 text-black">
-          <Spinner />
-          </div>}
+    <div className="flex mt-4 mb-6 shadow-lg justify-center w-full bg-white flex-col lg:flex-row">
+      <div className="p-4 flex items-center justify-center image w-full bg-slate-100 flex-col lg:w-[30rem]">
         <div className="w-full flex justify-end">
-          <button className="block" type="button" onClick={() => remove()}>
+          <button className="block text-slate-400 hover:text-green-600" title="Remove" type="button" onClick={() => remove()}>
             <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <g data-name="Layer 2">
                 <g data-name="close">
@@ -67,7 +60,22 @@ export default function ImageResult({
             </svg>  
           </button>
         </div>
+        <Image src={image.preview} alt={"Pallet Pal Preview"} />
+        <div>
+          <Count count={count} handleCount={updateCount} max={5} min={2} />
+        </div>
+      </div>
+      <div className="palette flex flex-col grow p-4 relative">
+        {loading && <div className="absolute inset-0 items-center z-10 w-full h-full flex justify-center opacity-50 bg-slate-400 text-black">
+          <Spinner />
+          </div>}
+        <div className="w-full flex justify-end">
+          <button title="Add to favorites" className="block text-slate-400 hover:text-green-600" type="button" onClick={() => handleAddFavourite({ colors, amount })}>
+            <FaPlus className='w-8 h-8' />
+          </button>
+        </div>
         {colors.length > 0 && <Colors colors={colors} amount={amount} />}
+        
       </div>
     </div>
   )

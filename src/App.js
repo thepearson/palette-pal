@@ -36,7 +36,7 @@ function App() {
   return (
     <div>
       <NavBar />
-      <div className="flex p-4 items-center justify-center flex-col bg-slate-200 min-h-screen">
+      <div className="flex p-4 flex-col bg-slate-200 min-h-screen">
         {images.length > 1 && <Clear handleClear={clearAll} />}
         {images.map((image, k) => (<ImageResult handleAddFavourite={(data) => addFavourite(data)} image={image} key={`image-${k}`} remove={() => removeImage(k)} />))}
         {images.length > 1 && <Clear handleClear={clearAll} />}

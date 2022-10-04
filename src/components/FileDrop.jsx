@@ -24,7 +24,7 @@ export default function FileDrop({images, setImages}) {
     });
 
   return (
-    <div {...getRootProps()} className="text-slate-500 cursor-pointer mt-[16rem] mb-[12rem] border-dashed border-2 border-slate-400 py-[8rem] px-[12rem]">
+    <div {...getRootProps()} className="w-full p-2 text-slate-500 cursor-pointer border-dashed border-2 border-slate-400 py-[12rem] text-center">
       <input {...getInputProps()} />{isDragActive ?
           <p>Drop the image or images here ...</p> :
           <p>Drag 'n' drop some image files here, or click to select files</p>}

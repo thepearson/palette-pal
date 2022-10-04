@@ -118,7 +118,7 @@ export default function Colors({
         >
           <div className="text-slate-500 flex justify-between text-xs p-1 mt-[-1.5rem]">
             <div>#{rgbHex(color[0], color[1], color[2])}</div>
-            <div>{`${color[0]},${color[1]},${color[2]}`}</div>
+            <div className="hidden md:block">{`${color[0]},${color[1]},${color[2]}`}</div>
           </div>
         </li>)}
       </ul>
@@ -136,14 +136,14 @@ export default function Colors({
           title={`${Math.round(amount[k] * 100)}%`}
         ></li>)}
       </ul>
-      <div className="mt-4 flex">
-          <div className="w-1/2">
+      <div className="mt-4 flex flex-col md:flex-row w-full">
+          <div className="w-full md:w-1/2">
             <span className="text-slate-500 text-xs">CSS</span>
             <div title="Click to copy to clipboard" onClick={() => copyToClip(templateString(colors, 'css'), 'CSS')} className="cursor-pointer flex flex-col bg-slate-800 place-content-center text-blue-400 text-xs min-h-[10rem] p-4 mr-1">
               <code className="whitespace-pre">{templateString(colors, 'css')}</code>
             </div>
           </div>
-          <div className="w-1/2">
+          <div className="w-full md:w-1/2">
             <span className="text-slate-500 text-xs">SCSS</span>
             <div title="Click to copy to clipboard" onClick={() => copyToClip(templateString(colors, 'scss'), 'SCSS')} className="cursor-pointer flex flex-col place-content-center bg-slate-800 text-blue-400 text-xs min-h-[10rem] p-4">
               <code className=" whitespace-pre">{templateString(colors, 'scss')}</code>

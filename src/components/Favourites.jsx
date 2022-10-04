@@ -6,13 +6,13 @@ export default function Favourites({
   remove
 }) {
   return (
-    <div>
-      <h2 id="favourites">Favourites</h2>
+    <div className="w-full mt-[2rem]">
+      <h2 className="text-4xl" id="favourites">Favourites</h2>
       <ul>
         {favourites.map((favourite, k) => {
           return (<li className="bg-white p-8 mt-4" key={k}>
             <div className="w-full flex justify-end">
-              <button className="block text-slate-400 hover:text-green-600" title="Remove" type="button" onClick={() => remove(k)}>
+              <button className="block hover:bg-slate-200 border" title="Remove" type="button" onClick={() => remove(k)}>
                 <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <g data-name="Layer 2">
                     <g data-name="close">

@@ -3,7 +3,7 @@ import Count from './Count';
 import Colors from './Colors';
 import Image from './Image';
 import Spinner from './Spinner';
-import { FaPlus } from 'react-icons/fa';
+import { FaRegHeart } from 'react-icons/fa';
 import * as palette from 'image-palette';
 import * as pixels from 'image-pixels';
 
@@ -49,7 +49,7 @@ export default function ImageResult({
     <div className="flex mt-4 mb-6 shadow-lg justify-center w-full bg-white flex-col lg:flex-row">
       <div className="p-4 flex items-center justify-center image w-full bg-slate-100 flex-col lg:w-[30rem]">
         <div className="w-full flex justify-end">
-          <button className="block text-slate-400 hover:text-green-600" title="Remove" type="button" onClick={() => remove()}>
+          <button className="block hover:bg-white border" title="Remove" type="button" onClick={() => remove()}>
             <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <g data-name="Layer 2">
                 <g data-name="close">
@@ -70,8 +70,8 @@ export default function ImageResult({
           <Spinner />
           </div>}
         <div className="w-full flex justify-end">
-          <button title="Add to favorites" className="block text-slate-400 hover:text-green-600" type="button" onClick={() => handleAddFavourite({ colors, amount })}>
-            <FaPlus className='w-8 h-8' />
+          <button title="Add to favorites" className="block text-slate-400 hover:text-red-600" type="button" onClick={() => handleAddFavourite({ colors, amount })}>
+            <FaRegHeart className='w-4 h-4' />
           </button>
         </div>
         {colors.length > 0 && <Colors colors={colors} amount={amount} />}

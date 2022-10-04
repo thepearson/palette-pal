@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Count from './Count';
 import Colors from './Colors';
 import Image from './Image';
+import Spinner from './Spinner';
 import * as palette from 'image-palette';
 import * as pixels from 'image-pixels';
 
@@ -13,16 +14,28 @@ export default function ImageResult({
   const [count, setCount] = useState(3);
   const [colors, setColors] = useState([]);
   const [amount, setAmount] = useState([]);
-  useEffect(() => {
+  const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    setLoading(true);
     const processImages = async () => {
-      const data = palette(await pixels(image), count);
+      const pix = await pixels(image);
+      
+      const data = await new Promise((resolve, reject) => {
+        const d = palette(pix, count);
+        if (d) resolve(d);
+        reject('error');
+      }).then(data => data);
+
       setColors(data.colors);
       setAmount(data.amount);
+      setLoading(false);
     }
 
     if (image) {
       processImages(image);
+    } else {
+      setLoading(false);
     }
   }, [image, count]);
 
@@ -38,7 +51,10 @@ export default function ImageResult({
           <Count count={count} handleCount={updateCount} max={5} min={2} />
         </div>
       </div>
-      <div className="palette flex flex-col grow p-4">
+      <div className="palette flex flex-col grow p-4 relative">
+        {loading && <div className="absolute inset-0 items-center z-10 w-full h-full flex justify-center opacity-50 bg-slate-400 text-black">
+          <Spinner />
+          </div>}
         <div className="w-full flex justify-end">
           <button className="block" type="button" onClick={() => remove()}>
             <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

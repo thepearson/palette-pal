@@ -94,10 +94,14 @@ export default function Colors({
   const copyToClip = (valueToCopy, str = null) => {
     copy(valueToCopy);
     if (str) {
-      toast(`Coppied ${str}`);
+      toast(`Coppied ${str}`, {
+        position: toast.POSITION.BOTTOM_RIGHT
+      });
     }
     else {
-      toast(`Coppied ${valueToCopy}`);
+      toast(`Coppied ${valueToCopy}`, {
+        position: toast.POSITION.BOTTOM_RIGHT
+      })
     }
     
     console.log(value, 'was coppied to the clipboard');

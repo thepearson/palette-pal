@@ -1,6 +1,13 @@
 import React from 'react'
 import Colors from './Colors'
 
+/**
+ * Favlurites component
+ * 
+ * @param props.favourites List of favourites objects [{colors: [], amount: []}, ...]
+ * @param props.remove (k: number) => void function used to remove an image from favourites, takes array index
+ * @returns Favourites COmponent
+ */
 export default function Favourites({
   favourites,
   remove

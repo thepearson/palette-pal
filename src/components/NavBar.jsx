@@ -1,6 +1,11 @@
 import { FaGithub } from 'react-icons/fa';
 import LogoImage from '../logo.png';
 
+/**
+ * Man nav component
+ * 
+ * @returns Main navigation bar component.
+ */
 export default function NavBar() {
   return (
     <nav className="flex items-center justify-between bg-blue-600 p-6">

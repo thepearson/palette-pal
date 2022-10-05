@@ -1,3 +1,8 @@
+/**
+ * Loading spinner component
+ * 
+ * @returns Loading spinner React component
+ */
 export default function Spinner() {
   return (
   <div role="status" className="items-center justify-center flex flex-rows">

@@ -1,3 +1,12 @@
+/**
+ * Count component
+ * 
+ * @param props.count number current number of colors we're extracting
+ * @param props.handleCount (number) => void, function used to update the colour count
+ * @param props.max number  maximum supported colors
+ * @param props.min number  minimum supported colors
+ * @returns Count component
+ */
 export default function Count({
   count,
   handleCount,

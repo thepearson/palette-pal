@@ -1,7 +1,10 @@
 import {FaCodepen, FaGithub, FaLinkedin } from 'react-icons/fa';
 
-import React from 'react'
-
+/**
+ * Footer component
+ * 
+ * @returns Footer component
+ */
 export default function Footer() {
   return (
     <footer className="text-center bg-blue-600 text-white mt-auto">

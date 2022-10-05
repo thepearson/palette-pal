@@ -10,26 +10,40 @@ import * as pixels from 'image-pixels';
 
 
 /**
+ * ImageResult component, this is the panel that is displayed when you 
+ * add an image to the dropzone.
  * 
- * @param {*} param0 
- * @returns 
+ * @param props.image         File{}   - File as defined by https://developer.mozilla.org/en-US/docs/Web/API/File
+ * @param props.image.preview string   - added via createObjectURL https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL
+ * @param props.remove        Callback - Called when removing an image panal from the list.
+ * @param props.handleAddFavourite Callback - Called when adding a color palette to your favourites.
+ * 
+ * @returns ImageResult component
  */
 export default function ImageResult({
-//  id,
   image,
   remove,
   handleAddFavourite
 }) {
+  // Maintains the amount of colours we want to extract form the image
   const [count, setCount] = useState(3);
+
+  // Maintains an array of the count colours extracted from the image
   const [colors, setColors] = useState([]);
+
+  // Maintains the amount of each colour found in the image as a percetage of 1.
   const [amount, setAmount] = useState([]);
+
+  // Loading flag, used for showing a spinner overlay when we make changes
   const [loading, setLoading] = useState(false);
 
+  // Watches changes to image and count and processes that change
   useEffect(() => {
+    // TODO: Figure out what's happening here.
+    // Loading modal seems sketchy.
     setLoading(true);
     const processImages = async () => {
       const pix = await pixels(image);
-      
       const data = await new Promise((resolve, reject) => {
         const d = palette(pix, count);
         if (d) resolve(d);
@@ -48,10 +62,20 @@ export default function ImageResult({
     }
   }, [image, count]);
 
+  /**
+   * Change the number of colors we want to extract.
+   * 
+   * @param {*} num 
+   */
   const updateCount = (num) => {
     setCount(num);
   }
 
+  /**
+   * Add a palette swatch to your favourites
+   * 
+   * @param {*} data 
+   */
   const addToFavourites = (data) => {
     handleAddFavourite(data);
     toast("Added to favourites", {

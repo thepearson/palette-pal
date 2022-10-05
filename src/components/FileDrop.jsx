@@ -1,8 +1,18 @@
 import {useCallback} from 'react'
 import {useDropzone} from 'react-dropzone'
 
+/**
+ * Filedrop component
+ * 
+ * @param props.images [] Array of currently loaded images
+ * @param props.setImages () => void  useState function for setting new images
+ * @returns 
+ */
 export default function FileDrop({images, setImages}) {
 
+  /**
+   * Take files dropped and set the image state
+   */
   const onDrop = useCallback(acceptedFiles => {
     setImages(
       acceptedFiles.map((file) =>
@@ -14,6 +24,9 @@ export default function FileDrop({images, setImages}) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /**
+   * react-dropzone initialise
+   */
   const {getRootProps, getInputProps, isDragActive} = useDropzone({
     useFsAccessApi: false,
       accept: {

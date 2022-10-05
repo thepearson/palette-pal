@@ -3,6 +3,13 @@ import useCopyToClipboard from '../hooks/useCopyToClipboard';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+/**
+ * Injection script, used to replace replacements.keys() found in str with value in replacements[key] value
+ * 
+ * @param {} str string template string
+ * @param {*} replacements Map() key => value, where key is the replacement string and value is the value to replace it with
+ * @returns string
+ */
 const inject = (str, replacements) => str.replace(/\$\[(.*?)\]/g, (x, g) => {
   if (replacements.has(g)) {
     return replacements.get(g);
@@ -10,6 +17,13 @@ const inject = (str, replacements) => str.replace(/\$\[(.*?)\]/g, (x, g) => {
   return x;
 });
 
+/**
+ * Template function used to return the template string for 
+ * css.
+ * 
+ * @param {*} length number, how many css properties do we account for. This shoudl map directly to the number of colors we're extracting.
+ * @returns 
+ */
 const css_template = (length) => {
   const template = `:root {
   --primary:    #$[primary];
@@ -42,6 +56,12 @@ const css_template = (length) => {
   }
 }
 
+/**
+ * Template function used to return the template string for SCSS
+ * 
+ * @param {*} length number how many scss properties do we account for. This shoudl map directly to the number of colors we're extracting.
+ * @returns 
+ */
 const scss_template = (length) => {
   const template = `$primary:     #$[primary];
 $secondary:   #$[secondary];`;
@@ -63,6 +83,9 @@ $quinary:     #$[quinary];`;
   }
 }
 
+/**
+ * The names of the variables to be exported.
+ */
 const order = [
   'primary',
   'secondary',
@@ -71,17 +94,31 @@ const order = [
   'quinary',
 ]
 
+/**
+ * 
+ * @param props.colors [] {count} length array of triples [0-255, 0-255, 0-255]
+ * @param props.amount [] {count} length array of percentages 0-1
+ * @returns 
+ */
 export default function Colors({
   colors,
   amount
 }) {
+  // Copy to clipboard hook
   const [value, copy] = useCopyToClipboard();
+
+  /**
+   * Function used to template out the string with the colours
+   * 
+   * @param colors array of colors
+   * @param type string 'css', 'scss'
+   * @returns 
+   */
   const templateString = (colors, type) => {
     const replacements = new Map();
     for (const [index, color] of colors.entries()) {
       replacements.set(order[index], rgbHex(color[0], color[1], color[2]));
     }
-
     switch (type) {
       default:
       case 'css':
@@ -91,6 +128,14 @@ export default function Colors({
     }
   }
 
+
+  /**
+   * Wrapper function used to copy to clipboard
+   * DOes other thigns like toasts the user so they have some feedback
+   * 
+   * @param {*} valueToCopy 
+   * @param {*} str 
+   */
   const copyToClip = (valueToCopy, str = null) => {
     copy(valueToCopy);
     if (str) {
@@ -103,7 +148,6 @@ export default function Colors({
         position: toast.POSITION.BOTTOM_RIGHT
       })
     }
-    
     console.warn(value, 'was coppied to the clipboard');
   }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import FileDrop from './components/FileDrop';
 
@@ -13,6 +13,35 @@ import Footer from './components/Footer';
 function App() {
   const [images, setImages] = useState([]);
   const [favourites, setFavourites] = useLocalStorage("favourites", []);
+
+  /**
+   * Runs on initial mount, looks for RecieveContent event
+   * fired by the chrome extension.
+   *
+   * @return  {[type]}  [return description]
+   */
+  useEffect(() => {
+    const handleData = (event) => {
+      if (event.detail.url) {
+        getFile(event.detail.url).then(
+          (data) => {
+            const file = new File([data], "filename");
+            const parsed_files = Object.assign(file, {preview: URL.createObjectURL(file)});
+            setImages([parsed_files]);
+          }
+        );
+      }
+    }
+    window.addEventListener('RecieveContent', handleData);
+    return () => {
+      window.removeEventListener('RecieveContent', handleData);
+    }
+  }, []);
+
+  const getFile = async (url) => {
+    let response = await fetch(url);
+    return await response.blob();
+  }
 
   const removeImage = (i) => {
     // Revoke the URL

@@ -25,6 +25,7 @@ export default function ImageResult({
   remove,
   handleAddFavourite
 }) {
+  console.log(image);
   // Maintains the amount of colours we want to extract form the image
   const [count, setCount] = useState(3);
 
@@ -43,16 +44,17 @@ export default function ImageResult({
     // Loading modal seems sketchy.
     setLoading(true);
     const processImages = async () => {
-      const pix = await pixels(image);
-      const data = await new Promise((resolve, reject) => {
-        const d = palette(pix, count);
-        if (d) resolve(d);
-        reject('error');
-      }).then(data => data);
-
-      setColors(data.colors);
-      setAmount(data.amount);
-      setLoading(false);
+      pixels(image).then((pix) => {
+        new Promise((resolve, reject) => {
+          const d = palette(pix, count);
+          if (d) resolve(d);
+          reject('error');
+        }).then(data => {
+          setColors(data.colors);
+          setAmount(data.amount);
+          setLoading(false);
+        });
+      });
     }
 
     if (image) {

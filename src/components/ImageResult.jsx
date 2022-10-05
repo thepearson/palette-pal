@@ -3,10 +3,17 @@ import Count from './Count';
 import Colors from './Colors';
 import Image from './Image';
 import Spinner from './Spinner';
+import { ToastContainer, toast } from 'react-toastify';
 import { FaRegHeart } from 'react-icons/fa';
 import * as palette from 'image-palette';
 import * as pixels from 'image-pixels';
 
+
+/**
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
 export default function ImageResult({
 //  id,
   image,
@@ -45,6 +52,14 @@ export default function ImageResult({
     setCount(num);
   }
 
+  const addToFavourites = (data) => {
+    handleAddFavourite(data);
+    toast("Added to favourites", {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
+
+  }
+
   return (
     <div className="flex mt-4 mb-6 shadow-lg justify-center w-full bg-white flex-col lg:flex-row">
       <div className="p-4 flex items-center justify-center image w-full bg-slate-100 flex-col lg:w-[30rem]">
@@ -70,12 +85,12 @@ export default function ImageResult({
           <Spinner />
           </div>}
         <div className="w-full flex justify-end">
-          <button title="Add to favorites" className="block text-slate-400 hover:text-red-600" type="button" onClick={() => handleAddFavourite({ colors, amount })}>
+          <button title="Add to favorites" className="block text-slate-400 hover:text-red-600 hover:animate-bounce" type="button" onClick={() => addToFavourites({ colors, amount })}>
             <FaRegHeart className='w-4 h-4' />
           </button>
         </div>
         {colors.length > 0 && <Colors colors={colors} amount={amount} />}
-        
+        <ToastContainer />
       </div>
     </div>
   )

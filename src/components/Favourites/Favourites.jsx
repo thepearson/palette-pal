@@ -24,7 +24,7 @@ export default function Favourites({
   }
   return (
     <div className="w-full mt-[2rem]">
-      <div className="flex">
+      <div className="flex justify-between">
         <h2 className="text-4xl" id="favourites">Favourites</h2>
         <button title="Download as JSON" type="button" onClick={() => download()}>
           <FaFileDownload className="ml-2 w-8 h-8 hover:text-blue-600" />

@@ -1,5 +1,6 @@
 import React from 'react'
 import Colors from 'components/Colors'
+import { FaFileDownload } from 'react-icons/fa';
 
 /**
  * Favlurites component
@@ -12,9 +13,23 @@ export default function Favourites({
   favourites,
   remove
 }) {
+  const download = () => {
+    const fileData = JSON.stringify(favourites);
+    const blob = new Blob([fileData], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = "favourites.json";
+    link.href = url;
+    link.click();
+  }
   return (
     <div className="w-full mt-[2rem]">
-      <h2 className="text-4xl" id="favourites">Favourites</h2>
+      <div className="flex">
+        <h2 className="text-4xl" id="favourites">Favourites</h2>
+        <button title="Download as JSON" type="button" onClick={() => download()}>
+          <FaFileDownload className="ml-2 w-8 h-8 hover:text-blue-600" />
+        </button>
+      </div>
       <ul>
         {favourites.map((favourite, k) => {
           return (<li className="bg-white p-8 mt-4" key={k}>

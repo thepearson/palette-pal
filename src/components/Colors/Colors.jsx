@@ -1,5 +1,5 @@
 import rgbHex from "rgb-hex";
-import useCopyToClipboard from '../hooks/useCopyToClipboard';
+import useCopyToClipboard from 'hooks/useCopyToClipboard';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -44,7 +44,7 @@ const css_template = (length) => {
   --quaternary: #$[quaternary];
 }`;
     case 5:
-      return  `:root {
+      return `:root {
   --primary:    #$[primary];
   --secondary:  #$[secondary];
   --tertiary:   #$[tertiary];
@@ -65,7 +65,7 @@ const css_template = (length) => {
 const scss_template = (length) => {
   const template = `$primary:     #$[primary];
 $secondary:   #$[secondary];`;
-  switch(length) {
+  switch (length) {
     case 3:
       return template + `
 $tertiary:    #$[tertiary];`;
@@ -181,18 +181,18 @@ export default function Colors({
         ></li>)}
       </ul>
       <div className="mt-4 flex flex-col md:flex-row w-full">
-          <div className="w-full md:w-1/2">
-            <span className="text-slate-500 text-xs">CSS</span>
-            <div title="Click to copy to clipboard" onClick={() => copyToClip(templateString(colors, 'css'), 'CSS')} className="cursor-pointer flex flex-col bg-slate-800 place-content-center text-blue-400 text-xs min-h-[10rem] p-4 mr-1">
-              <code className="whitespace-pre">{templateString(colors, 'css')}</code>
-            </div>
+        <div className="w-full md:w-1/2">
+          <span className="text-slate-500 text-xs">CSS</span>
+          <div title="Click to copy to clipboard" onClick={() => copyToClip(templateString(colors, 'css'), 'CSS')} className="cursor-pointer flex flex-col bg-slate-800 place-content-center text-blue-400 text-xs min-h-[10rem] p-4 mr-1">
+            <code className="whitespace-pre">{templateString(colors, 'css')}</code>
           </div>
-          <div className="w-full md:w-1/2">
-            <span className="text-slate-500 text-xs">SCSS</span>
-            <div title="Click to copy to clipboard" onClick={() => copyToClip(templateString(colors, 'scss'), 'SCSS')} className="cursor-pointer flex flex-col place-content-center bg-slate-800 text-blue-400 text-xs min-h-[10rem] p-4">
-              <code className=" whitespace-pre">{templateString(colors, 'scss')}</code>
-            </div>
+        </div>
+        <div className="w-full md:w-1/2">
+          <span className="text-slate-500 text-xs">SCSS</span>
+          <div title="Click to copy to clipboard" onClick={() => copyToClip(templateString(colors, 'scss'), 'SCSS')} className="cursor-pointer flex flex-col place-content-center bg-slate-800 text-blue-400 text-xs min-h-[10rem] p-4">
+            <code className=" whitespace-pre">{templateString(colors, 'scss')}</code>
           </div>
+        </div>
       </div>
       <ToastContainer />
     </div>

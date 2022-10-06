@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import FileDrop from './components/FileDrop';
-
 import useLocalStorage from './hooks/useLocalStorage';
-
 import Favourites from './components/Favourites';
 import NavBar from './components/NavBar';
 import ImageResult from './components/ImageResult';
 import Clear from './components/Clear';
 import Footer from './components/Footer';
 import * as shorthash from 'short-hash';
+
 
 function App() {
   const [images, setImages] = useState([]);
@@ -27,7 +26,7 @@ function App() {
         getFile(event.detail.url).then(
           (data) => {
             const file = new File([data], "filename");
-            const parsed_files = Object.assign(file, {preview: URL.createObjectURL(file)});
+            const parsed_files = Object.assign(file, { preview: URL.createObjectURL(file) });
             setImages([parsed_files]);
           }
         );

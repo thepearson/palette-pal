@@ -1,5 +1,5 @@
 import { FaGithub } from 'react-icons/fa';
-import LogoImage from '../logo.png';
+import LogoImage from 'logo.png';
 
 /**
  * Man nav component

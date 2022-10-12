@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Count from './Count';
-import Colors from './Colors';
-import Image from './Image';
-import Spinner from './Spinner';
+import Count from 'components/Count';
+import Colors from 'components/Colors';
+import Image from 'components/Image';
+import Spinner from 'components/Spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import { FaRegHeart } from 'react-icons/fa';
 import * as palette from 'image-palette';
@@ -88,11 +88,11 @@ export default function ImageResult({
             <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <g data-name="Layer 2">
                 <g data-name="close">
-                  <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"/>
-                  <path d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z"/>
+                  <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0" />
+                  <path d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z" />
                 </g>
               </g>
-            </svg>  
+            </svg>
           </button>
         </div>
         <Image src={image.preview} alt={"Pallet Pal Preview"} />
@@ -103,7 +103,7 @@ export default function ImageResult({
       <div className="palette flex flex-col grow p-4 relative">
         {loading && <div className="absolute inset-0 items-center z-10 w-full h-full flex justify-center opacity-50 bg-slate-400 text-black">
           <Spinner />
-          </div>}
+        </div>}
         <div className="w-full flex justify-end">
           <button title="Add to favorites" className="block text-slate-400 hover:text-red-600 hover:animate-bounce" type="button" onClick={() => addToFavourites({ colors, amount })}>
             <FaRegHeart className='w-4 h-4' />

@@ -138,31 +138,24 @@ export default function Colors({
    */
   const copyToClip = (valueToCopy, str = null) => {
     copy(valueToCopy);
-    if (str) {
-      toast(`Coppied ${str}`, {
-        position: toast.POSITION.BOTTOM_RIGHT
-      });
-    }
-    else {
-      toast(`Coppied ${valueToCopy}`, {
-        position: toast.POSITION.BOTTOM_RIGHT
-      })
-    }
-    console.warn(value, 'was coppied to the clipboard');
+    toast(`Copied ${str || valueToCopy}`, {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
+    console.warn(value, 'was copied to the clipboard');
   }
 
   return (
     <div className="flex flex-col w-full mt-12">
       <ul className='mt-4 flex flex-row w-full cursor-pointer'>
-        {colors.map((color, k) => <li onClick={() => copyToClip(`#${rgbHex(color[0], color[1], color[2])}`)}
+        {colors.map(([r,g,b], k) => <li onClick={() => copyToClip(`#${rgbHex(r, g, b)}`)}
           key={k}
-          style={{ backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})` }}
+          style={{ backgroundColor: `rgb(${r},${g},${b})` }}
           className={"grow h-28 p-1"}
-          title={`Click to copy '#${rgbHex(color[0], color[1], color[2])}' to your clipboard`}
+          title={`Click to copy '#${rgbHex(r, g, b)}' to your clipboard`}
         >
           <div className="text-slate-500 flex justify-between text-xs p-1 mt-[-1.5rem]">
-            <div>#{rgbHex(color[0], color[1], color[2])}</div>
-            <div className="hidden md:block">{`${color[0]},${color[1]},${color[2]}`}</div>
+            <div>#{rgbHex(r, g, b)}</div>
+            <div className="hidden md:block">{`${r},${g},${b}`}</div>
           </div>
         </li>)}
       </ul>
@@ -170,10 +163,10 @@ export default function Colors({
       <ul className='mt-1 flex flex-row w-full' style={{
         backgroundColor: `rgb(${colors[colors.length - 1][0]},${colors[colors.length - 1][1]},${colors[colors.length - 1][2]})`
       }}>
-        {colors.map((color, k) => <li
+        {colors.map(([r,g,b], k) => <li
           key={k}
           style={{
-            backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,
+            backgroundColor: `rgb(${r},${g},${b})`,
             width: `${Math.round(amount[k] * 100)}%`
           }}
           className={"h-4 p-1"}

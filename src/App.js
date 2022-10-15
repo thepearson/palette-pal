@@ -68,7 +68,7 @@ function App() {
       <NavBar />
       <div className="flex p-4 flex-col bg-slate-200 min-h-[50rem]">
         {images.length > 1 && <Clear handleClear={clearAll} />}
-        {images.map((image, k) => (<ImageResult handleAddFavourite={(data) => addFavourite(data)} image={image} key={shorthash(image.preview)} remove={() => removeImage(k)} />))}
+        {images.map((image, k) => (<ImageResult handleAddFavourite={addFavourite} image={image} key={shorthash(image.preview)} remove={() => removeImage(k)} />))}
         {images.length > 1 && <Clear handleClear={clearAll} />}
         {images.length === 0 && <FileDrop images={images} setImages={setImages} />}
         {favourites.length > 0 && <Favourites favourites={favourites} remove={removeFavourite} />}

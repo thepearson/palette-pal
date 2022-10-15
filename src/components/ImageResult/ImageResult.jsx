@@ -44,21 +44,15 @@ export default function ImageResult({
     // Loading modal seems sketchy.
     setLoading(true);
     const processImages = async () => {
-      pixels(image).then((pix) => {
-        new Promise((resolve, reject) => {
-          const d = palette(pix, count);
-          if (d) resolve(d);
-          reject('error');
-        }).then(data => {
-          setColors(data.colors);
-          setAmount(data.amount);
-          setLoading(false);
-        });
-      });
+      const p = await pixels(image);
+      const d = palette(p, count);
+      setColors(d.colors);
+      setAmount(d.amount);
+      setLoading(false);
     }
 
     if (image) {
-      processImages(image);
+      processImages();
     } else {
       setLoading(false);
     }
